@@ -1,1 +1,2 @@
-# ACM_Template
+# Algorithm_Template
+# C/C++
