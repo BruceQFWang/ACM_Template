@@ -1,14 +1,13 @@
 
 poj2155
-ÌâÒâ£ºÓÐÒ»¸ö¾ØÕó£¬Ã¿´Î²Ù×÷¿ÉÒÔÊÇ±à¼­Ä³¸ö¾ØÐÎÇøÓò£¬Õâ¸öÇøÓòµÄ0¸ÄÎª1£¬1¸ÄÎª0£¬Ã¿´Î²éÑ¯Ö»²éÑ¯Ä³Ò»¸öµãµÄÖµÊÇ0»¹ÊÇ1¡£
-Ë¼Â·£º
-¿ÉÒÔÊ¹ÓÃ¶þÎ¬Ê÷×´Êý×é¡£
-¶þÎ¬µÄÐ´ÆðÀ´ºÜ·½±ã£¬Á½ÖØÑ­»·¡£
-Èç¹ûÊÇÒªÐÞ¸Ä(x1,y1)  -  (x2,y2)µÄ¾ØÐÎÇøÓò¡£
-ÄÇÃ´¿ÉÒÔÔÚ(x1,y1) ³ö¼Ó1£¬ÔÚ(x2+1,y1)´¦¼Ó1£¬ÔÚ(x1,y2+1)´¦¼Ó1£¬ÔÚ(x2+1,y2+1)´¦¼Ó1 ¡£¡£
-»­¸öÍ¼¾ÍÖªµÀÁË£¬²éÑ¯µ¥µã¾ÍÊÇÇóºÍ¡£
-²Î¿¼£º http://blog.csdn.net/zxy_snow/article/details/6264135
-¸´ÔÓ¶È£ºO(4*m*log^2n)
+é¢˜æ„ï¼šæœ‰ä¸€ä¸ªçŸ©é˜µï¼Œæ¯æ¬¡æ“ä½œå¯ä»¥æ˜¯ç¼–è¾‘æŸä¸ªçŸ©å½¢åŒºåŸŸï¼Œè¿™ä¸ªåŒºåŸŸçš„0æ”¹ä¸º1ï¼Œ1æ”¹ä¸º0ï¼Œæ¯æ¬¡æŸ¥è¯¢åªæŸ¥è¯¢æŸä¸€ä¸ªç‚¹çš„å€¼æ˜¯0è¿˜æ˜¯1ã€‚
+æ€è·¯ï¼š
+å¯ä»¥ä½¿ç”¨äºŒç»´æ ‘çŠ¶æ•°ç»„ã€‚
+äºŒç»´çš„å†™èµ·æ¥å¾ˆæ–¹ä¾¿ï¼Œä¸¤é‡å¾ªçŽ¯ã€‚
+å¦‚æžœæ˜¯è¦ä¿®æ”¹(x1,y1)  -  (x2,y2)çš„çŸ©å½¢åŒºåŸŸã€‚
+é‚£ä¹ˆå¯ä»¥åœ¨(x1,y1) å‡ºåŠ 1ï¼Œåœ¨(x2+1,y1)å¤„åŠ 1ï¼Œåœ¨(x1,y2+1)å¤„åŠ 1ï¼Œåœ¨(x2+1,y2+1)å¤„åŠ 1 ã€‚ã€‚
+ç”»ä¸ªå›¾å°±çŸ¥é“äº†ï¼ŒæŸ¥è¯¢å•ç‚¹å°±æ˜¯æ±‚å’Œã€‚
+å¤æ‚åº¦ï¼šO(4*m*log^2n)
 const int N = 1e3+5;
 
 struct BIT{
@@ -20,12 +19,12 @@ struct BIT{
             for(int j=1; j<=n; j++)
                 c[i][j] = 0;
     }
-    void update(int x, int y, ll val){  //µÚ¶þÖÖÇø¼ä¸üÐÂ
+    void update(int x, int y, ll val){  //ç¬¬äºŒç§åŒºé—´æ›´æ–°
         for(int i=x; i<=n; i+=i&-i)
             for(int j=y; j<=n; j+=j&-j)
                 c[i][j] += val;
     }
-    ll query(int x, int y){ //µ¥µã²éÑ¯
+    ll query(int x, int y){ //å•ç‚¹æŸ¥è¯¢
         ll ret = 0;
         for(int i=x; i>0; i-=i&-i)
             for(int j=y; j>0; j-=j&-j)
