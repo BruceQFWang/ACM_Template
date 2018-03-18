@@ -1,7 +1,7 @@
-//   Êµ¼ÊÉÏÊÇBFS
+//   å®žé™…ä¸Šæ˜¯BFS
 const int inf=1e9;
 const int maxn=555;
-vector<pair<int,int> >E[maxn];//ÁÚ½Ó±í
+vector<pair<int,int> >E[maxn];//é‚»æŽ¥è¡¨
 int n,m;
 int cnt[maxn];
 int d[maxn],inq[maxn];
@@ -36,7 +36,7 @@ int  main(){
         init();
         for(int i=0; i<m; i++){
             int x,y,z;scanf("%d %d %d",&x,&y,&z);
-            E[x].push_back(make_pair(y,z));  //±ßx,y,±ßÈ¨z
+            E[x].push_back(make_pair(y,z)); //è¾¹x,y,è¾¹æƒz
             E[y].push_back(make_pair(x,z));
         }
         int  s,t;
