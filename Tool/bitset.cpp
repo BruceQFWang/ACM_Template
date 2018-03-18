@@ -1,4 +1,5 @@
 ![image](https://github.com/Cyberstk/ACM_Template/blob/master/Tool/bitset.jpg)
+
 题意：给一个DAG，每次可以删点或者加点，问总存在路径的点对的个数
 思路：
 
