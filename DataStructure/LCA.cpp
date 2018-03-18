@@ -1,15 +1,14 @@
-(ÀëÏßËã·¨£¨TarjanËã·¨£©¸´ÔÓ¶ÈO(n+q)Ã»Ñ§)
-hdu2586  ²Î¿¼²©¿Í:http://blog.csdn.net/liangzhaoyang1/article/details/52549822
-ÌâÒâ£º²éÑ¯Ê÷ÉÏÁ½µã¾àÀë
-ÔÚÏßËã·¨ DFS + ST±í  ¸´ÔÓ¶ÈO(nlogn+q) Ô¤´¦Àínlogn ²éÑ¯O(1)    ´ø±ßÈ¨
+hdu2586           
+é¢˜æ„ï¼šæŸ¥è¯¢æ ‘ä¸Šä¸¤ç‚¹è·ç¦»
+åœ¨çº¿ç®—æ³• DFS + STè¡¨  å¤æ‚åº¦O(nlogn+q) é¢„å¤„ç†nlogn æŸ¥è¯¢O(1)    å¸¦è¾¹æƒ
 const int N = 4e4+5;
 const int M = 25;
 
-int dp[N<<1][M], lg[N];  //Õâ¸öÊı×é¼ÇµÃ¿ªµ½2*N£¬ÒòÎª±éÀúºóĞòÁĞ³¤¶ÈÎª2*n-1
+int dp[N<<1][M], lg[N];  //è¿™ä¸ªæ•°ç»„è®°å¾—å¼€åˆ°2*Nï¼Œå› ä¸ºéå†ååºåˆ—é•¿åº¦ä¸º2*n-1
 
 struct Edge{
     int to, next, w;
-}edge[N<<2];  //±ßÒª¿ª´óµã
+}edge[N<<2];  //è¾¹è¦å¼€å¤§ç‚¹
 int tol, head[N];
 
 void init(){
@@ -22,7 +21,7 @@ void addedge(int u, int v, int w){
 }
 
 int ver[N<<1], R[N<<1], first[N], dis[N], cnt;
-//ver:½Úµã±àºÅ R£ºÉî¶È first£ºµã±àºÅÎ»ÖÃ dis£º¾àÀë cnt:±éÀúºóĞòÁĞ³¤¶È
+//ver:èŠ‚ç‚¹ç¼–å· Rï¼šæ·±åº¦ firstï¼šç‚¹ç¼–å·ä½ç½® disï¼šè·ç¦» cnt:éå†ååºåˆ—é•¿åº¦
 void dfs(int u, int pre, int dep){
     ver[++cnt] = u; first[u] = cnt; R[cnt] = dep;
     for(int i=head[u]; i!=-1; i=edge[i].next){
@@ -46,10 +45,10 @@ int rmq_init(int n){
         }
 }
 
-//²éÑ¯×îĞ¡Öµ,ÖĞ¼ä²¿·ÖÊÇ½»²æµÄ
+//æŸ¥è¯¢æœ€å°å€¼,ä¸­é—´éƒ¨åˆ†æ˜¯äº¤å‰çš„
 int rmq(int l,int r){
     int k=lg[r-l+1];
-    int a = dp[l][k], b = dp[r-(1<<k)+1][k]; //·µ»ØÆäÔÚverÊı×éÖĞµÄÏÂ±ê
+    int a = dp[l][k], b = dp[r-(1<<k)+1][k]; //è¿”å›å…¶åœ¨veræ•°ç»„ä¸­çš„ä¸‹æ ‡
     return R[a]<R[b]?a:b;
 }
 
@@ -57,7 +56,7 @@ int LCA(int u, int v){
     int x = first[u], y = first[v];
     if(x > y)swap(x, y);
     int ret = rmq(x, y);
-    return ver[ret];//Î¬»¤Ò»¸ödpÊı×é±£´æÆäÇø¼äÉî¶È×îĞ¡µÄÏÂ±ê£¬²éÕÒµÄÊ±ºò·µ»Ø¾Í¿ÉÒÔÁË¡£
+    return ver[ret];//ç»´æŠ¤ä¸€ä¸ªdpæ•°ç»„ä¿å­˜å…¶åŒºé—´æ·±åº¦æœ€å°çš„ä¸‹æ ‡ï¼ŒæŸ¥æ‰¾çš„æ—¶å€™è¿”å›å°±å¯ä»¥äº†ã€‚
 }
 
 int in[N];
@@ -72,7 +71,7 @@ int  main(){
         for(int i=1; i<n; i++){
             int u, v, w;
             scanf("%d%d%d", &u, &v, &w);
-            addedge(u, v, w); //u , vÖ®¼ä±ßÈ¨Îªw
+            addedge(u, v, w); //u , vä¹‹é—´è¾¹æƒä¸ºw
             addedge(v, u, w);
             in[v]++;
         }
@@ -80,7 +79,7 @@ int  main(){
         for(int i=1; i<=n; i++)if(!in[i])root = i;
         dis[root] = 0; cnt = 0;
         dfs(root, -1, 0);
-        rmq_init(2*n-1);  //½¨Á¢ĞéµãµÄ»°Òª×¢ÒâµãÊıµÄÔö¼Ó  ÆäËûµÄrmqÏÂ±ê²»ĞèÒª¿¼ÂÇ
+        rmq_init(2*n-1);  //å»ºç«‹è™šç‚¹çš„è¯è¦æ³¨æ„ç‚¹æ•°çš„å¢åŠ   å…¶ä»–çš„rmqä¸‹æ ‡ä¸éœ€è¦è€ƒè™‘
         while(q--){
             int u, v;
             scanf("%d%d", &u, &v);
@@ -91,11 +90,9 @@ int  main(){
     return 0;
 }
 
-Ê÷Á´ÆÊ·ÖÇó×î½ü¹«¹²×æÏÈ ¸´ÔÓ¶ÈÔ¤´¦ÀíO(nlogn) ²éÑ¯O(logn)
-3379Ä£°åÌâhttps://www.luogu.org/problem/show?pid=3379#sub
-ÌâÒâ£ºÖ±½ÓÇóLCA
-²Î¿¼²©¿Í£ºhttp://www.cnblogs.com/qilinart2/articles/5931595.html
-http://www.cnblogs.com/fuyun-boy/p/6045709.html
+æ ‘é“¾å‰–åˆ†æ±‚æœ€è¿‘å…¬å…±ç¥–å…ˆ å¤æ‚åº¦é¢„å¤„ç†O(nlogn) æŸ¥è¯¢O(logn)
+3379æ¨¡æ¿é¢˜
+é¢˜æ„ï¼šç›´æ¥æ±‚LCA
 
 const int N = 5e5+5;
 int n, m, q;
@@ -104,11 +101,11 @@ struct Edge{
 }edge[N<<1];
 
 int head[N], tol;
-int top[N];//top[v]±íÊ¾vËùÔÚµÄÖØÁ´µÄ¶¥¶Ë½Úµã
-int fa[N];//¸¸Ç×½Úµã
-int dep[N];//Éî¶È
-int sz[N];//sz[v]±íÊ¾ÒÔvÎª¸ùµÄ×ÓÊ÷µÄ½ÚµãÊı
-int son[N];//ÖØ¶ù×Ó
+int top[N];//top[v]è¡¨ç¤ºvæ‰€åœ¨çš„é‡é“¾çš„é¡¶ç«¯èŠ‚ç‚¹
+int fa[N];//çˆ¶äº²èŠ‚ç‚¹
+int dep[N];//æ·±åº¦
+int sz[N];//sz[v]è¡¨ç¤ºä»¥vä¸ºæ ¹çš„å­æ ‘çš„èŠ‚ç‚¹æ•°
+int son[N];//é‡å„¿å­
 
 int a[N];
 
@@ -122,7 +119,7 @@ void addedge(int u, int  v){
     edge[tol].to = v;edge[tol].next = head[u]; head[u] = tol++;
 }
 
-void dfs1(int u, int pre, int d){//µÚÒ»±édfsÇó³öfa,deep,sz,son
+void dfs1(int u, int pre, int d){//ç¬¬ä¸€édfsæ±‚å‡ºfa,deep,sz,son
     dep[u] = d;
     fa[u] = pre;
     sz[u] = 1;
@@ -137,21 +134,21 @@ void dfs1(int u, int pre, int d){//µÚÒ»±édfsÇó³öfa,deep,sz,son
     }
 }
 
-void getpos(int u, int sp){ //µÚ¶ş±édfsÇó³ötopºÍp
+void getpos(int u, int sp){ //ç¬¬äºŒédfsæ±‚å‡ºtopå’Œp
     top[u] = sp;
     if(son[u] != -1)getpos(son[u], sp);
     for(int i=head[u]; i!=-1; i=edge[i].next){
         int v = edge[i].to;
         if(v != son[u] && v != fa[u])
-            getpos(v, v); //Çá¶ù×Ó
+            getpos(v, v); //è½»å„¿å­
     }
 }
 
 int LCA(int x, int y){
-    //Èç¹ûÁ½¸öµÄÁ´¶¥²»ÏàµÈ£¬ÎÒÃÇ¾Í°ÑËûÃÇÍùÒ»Æğ¿¿
-    //¿´ÄÇ¸öµãµÄÁ´¶¥Éî¶È´ó¸Ä±äÄÇ¸öµã
+    //å¦‚æœä¸¤ä¸ªçš„é“¾é¡¶ä¸ç›¸ç­‰ï¼Œæˆ‘ä»¬å°±æŠŠä»–ä»¬å¾€ä¸€èµ·é 
+    //çœ‹é‚£ä¸ªç‚¹çš„é“¾é¡¶æ·±åº¦å¤§æ”¹å˜é‚£ä¸ªç‚¹
     for( ; top[x]!=top[y] ; dep[top[x]]>dep[top[y]]?x=fa[top[x]]:y=fa[top[y]]);
-    return dep[x]<dep[y]?x:y; //·µ»ØÊ±Òª·µ»ØÉî¶È±È½ÏĞ¡µÄÊı
+    return dep[x]<dep[y]?x:y; //è¿”å›æ—¶è¦è¿”å›æ·±åº¦æ¯”è¾ƒå°çš„æ•°
 }
 
 int  main(){
