@@ -1,2 +1,1 @@
-# Algorithm_Template
-  C/C++
+# 家中常备 ACM 模板 
